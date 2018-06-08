@@ -6,16 +6,12 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -42,10 +38,6 @@ public class ClientAccount implements Serializable {
     private String email;   // email = login
     @NotNull
     private String password;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private Collection<ClientOrder> commandesCollection;
-    @OneToMany(mappedBy = "client")
-    private List<PaymentMethod> paymentMethods;
 
     public ClientAccount() {
     }
@@ -107,29 +99,12 @@ public class ClientAccount implements Serializable {
         this.password = password;
     }
 
-    public Collection<ClientOrder> getCommandesCollection() {
-        return commandesCollection;
-    }
-
-    public void setCommandesCollection(Collection<ClientOrder> commandesCollection) {
-        this.commandesCollection = commandesCollection;
-    }
-
     public Address getAddress() {
         return address;
     }
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public List<PaymentMethod> getPaymentMethods() {
-        return paymentMethods;
-    }
-
-    public void setPaymentMethods(List<PaymentMethod> paymentMethods) {
-        this.paymentMethods = paymentMethods;
-    }
-    
+    }   
 
 }

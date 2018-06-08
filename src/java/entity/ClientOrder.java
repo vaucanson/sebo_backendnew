@@ -3,13 +3,11 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -51,9 +49,6 @@ public class ClientOrder implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date deliveryDate;
-    
-    @OneToMany(mappedBy = "clientOrder")
-    private List<OrderLine> orderLines;
     
     
 
@@ -125,14 +120,6 @@ public class ClientOrder implements Serializable {
 
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
-    }
-
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
-
-    public void setOrderLines(List<OrderLine> orderLines) {
-        this.orderLines = orderLines;
     }
     
     

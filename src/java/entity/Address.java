@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -33,14 +32,6 @@ public class Address implements Serializable {
     private String town;
     @NotNull
     private int zipcode;
-    
-    @OneToMany(mappedBy = "address")
-    private List<ClientAccount> clients;
-    @OneToMany(mappedBy = "address")
-    private List<ClientOrder> clientOrders;
-
-    
-    
    
 
     public Address() {
@@ -99,25 +90,5 @@ public class Address implements Serializable {
     public String toString() {
         return number + " " + road + " " + town + " " + zipcode;
     }
-
-
-
-    public List<ClientAccount> getClients() {
-        return clients;
-    }
-
-    public void setClients(List<ClientAccount> clients) {
-        this.clients = clients;
-    }
-
-    public List<ClientOrder> getClientOrders() {
-        return clientOrders;
-    }
-
-    public void setClientOrders(List<ClientOrder> clientOrders) {
-        this.clientOrders = clientOrders;
-    }
-    
-    
-    
+   
 }

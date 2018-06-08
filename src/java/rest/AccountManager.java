@@ -6,6 +6,11 @@
 package rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entity.ClientAccount;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -22,19 +27,25 @@ import javax.ws.rs.core.MediaType;
 @Path("accountmanager")
 public class AccountManager {
     
+    @EJB business.ClientAccount cliAcc;
     /**
      * Vérifie si l'association login / password existe afin de connecter le client
      * @param login est l'identifiant saisi par le client
      * @param password est le mot de passe saisi par le client
+<<<<<<< HEAD
      * @return un code de retour indiquant si l'as
      * sociation est bonne ou non afin d'autoriser ou pas la connection
+=======
+     * @return un clientAccount
+>>>>>>> master
      */
     @GET
     @Path("connect/{login}/{password}")
-    public int connect(@PathParam("login") String login, @PathParam("password") String password)
+    public ClientAccount connect(@PathParam("login") String login, @PathParam("password") String password)
     {
-     
-        return 0;
+        entity.ClientAccount client = cliAcc.connect(login, password);
+          
+        return client;
     }
     
     /**
@@ -47,9 +58,16 @@ public class AccountManager {
     @Path("create")
     public int create(String customerAccount)
     {
-        ObjectMapper mapper = new ObjectMapper();
+        int retour = 1;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            entity.ClientAccount ca =  mapper.readValue(customerAccount, entity.ClientAccount .class);
+            retour = cliAcc.create(ca);
+
            
-            
-        return 0;
-    }
+        } catch (IOException ex) {
+            Logger.getLogger(AccountManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retour;
+    } 
 }

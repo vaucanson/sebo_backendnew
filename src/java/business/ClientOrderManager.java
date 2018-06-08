@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 /**
@@ -88,10 +89,15 @@ public class ClientOrderManager
      * @return 
      */
     public List<ClientOrder> getByCustomer(int customerId) {
-        List<ClientOrder> retour = new ArrayList<ClientOrder>();
-        ClientAccount cli = em.find(ClientAccount.class, customerId);
-        retour = (List<ClientOrder>) cli.getCommandesCollection();
+        List<ClientOrder> retour=null;
+        String strSql = "select co from ClientOrder co where co.client.id =:anId";
         
+        try {
+        Query query = em.createQuery(strSql);
+        retour = query.getResultList();   
+        } catch (PersistenceException pe) {
+            System.out.println("Problem retrieving ClientOrder list : " + pe.getMessage());
+        }  
         return retour;
     }
     
