@@ -32,12 +32,7 @@ public class AccountManager {
      * Vérifie si l'association login / password existe afin de connecter le client
      * @param login est l'identifiant saisi par le client
      * @param password est le mot de passe saisi par le client
-<<<<<<< HEAD
-     * @return un code de retour indiquant si l'as
-     * sociation est bonne ou non afin d'autoriser ou pas la connection
-=======
      * @return un clientAccount
->>>>>>> master
      */
     @GET
     @Path("connect/{login}/{password}")
