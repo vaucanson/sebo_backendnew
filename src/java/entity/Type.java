@@ -6,12 +6,9 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -23,8 +20,6 @@ public class Type implements Serializable {
     private String name;
     @ManyToOne
     private Sale sale;
-    @OneToMany(mappedBy = "type")
-    private Collection<Product> products;
 
     public Type() {
     }
@@ -52,17 +47,9 @@ public class Type implements Serializable {
         this.sale = sale;
     }
 
-    public Collection<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public String toString() {
-        return "Type{" + "name=" + name + ", sale=" + sale + ", products=" + products + '}';
+        return "Type{" + "name=" + name + ", sale=" + sale + '}';
     }
     
     

@@ -30,10 +30,6 @@ public class Supplier implements Serializable {
     private String name;
     @OneToOne
     private Address address;
-    @OneToMany(mappedBy = "supplier")
-    private Collection<ResupplyOrder> resupplyOrders;
-    @OneToMany(mappedBy = "supplier")
-    private List<Product> products;
 
     public Supplier() {
     }
@@ -69,25 +65,9 @@ public class Supplier implements Serializable {
         this.address = address;
     }
 
-    public Collection<ResupplyOrder> getResupplyOrders() {
-        return resupplyOrders;
-    }
-
-    public void setResupplyOrders(Collection<ResupplyOrder> resupplyOrders) {
-        this.resupplyOrders = resupplyOrders;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public String toString() {
-        return "Supplier{" + "id=" + id + ", name=" + name + ", address=" + address + ", resupplyOrders=" + resupplyOrders + ", products=" + products + '}';
+        return "Supplier{" + "id=" + id + ", name=" + name + ", address=" + address + ", resupplyOrders=" + '}';
     }
     
     

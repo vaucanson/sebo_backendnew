@@ -20,6 +20,7 @@ public class SupplierOrderLine implements Serializable {
     @ManyToOne
     private Product product;
     private float subTotal;
+    
     @ManyToOne
     private ResupplyOrder order;
 

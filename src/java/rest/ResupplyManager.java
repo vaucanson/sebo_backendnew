@@ -120,7 +120,10 @@ public class ResupplyManager {
 
         return ro;
     }
+    
+   
 
+    
     /**
      * Méthode permettant de rentrer en stock les articles d'une commande auprès
      * d'un fournisseur
