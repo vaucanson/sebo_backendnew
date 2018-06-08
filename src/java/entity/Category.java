@@ -20,10 +20,7 @@ public class Category implements Serializable {
     
     @Id
     private String name;
-    @OneToMany(mappedBy = "category")
-    private Collection<Product> products;
 
-    
     public Category() {
     }
 
@@ -39,17 +36,9 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public Collection<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
-    }
-
     @Override
     public String toString() {
-        return "Category{" + "name=" + name + ", products=" + products + '}';
+        return "Category{" + "name=" + name + '}';
     }
     
     

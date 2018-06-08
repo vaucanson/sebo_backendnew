@@ -94,7 +94,7 @@ public int remove (int idSupplier){
  * @param sup is the supplier to update
  * @return 0 if the operation went well
  */
-public int update (SupplierBusiness sup){
+public int update (Supplier sup){
      int codeRet = 1;
 
         try {

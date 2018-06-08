@@ -5,8 +5,14 @@
  */
 package rest;
 
+import business.SupplierBusiness;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.Supplier;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,19 +31,31 @@ import javax.ws.rs.core.MediaType;
 @Path("suppliermanager")
 public class SupplierManager {
 
+    @EJB SupplierBusiness sb;
     /**
      * Méthode permettant d'ajouter un nouveau fournisseur à notre catalogue
      *
-     * @param Json : le fournisseur que nous souhaitons ajouter a notre collection
+     * @param supplier : le fournisseur que nous souhaitons ajouter a notre collection
      * en format json
      * @return un code de retour indiquant si l'ajout s'est bien passé
      */
     @Path("add")
     @Consumes("application/json")
     @POST
-    public int add(String Json) {
+    public int add(String supplier) {
 
-        return 0;
+        int retour = 1;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Supplier s = mapper.readValue(supplier, Supplier.class);
+            
+            retour = sb.add(s);
+
+           
+        } catch (IOException ex) {
+            Logger.getLogger(SupplierManager.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return retour;
     }
 
     /**
@@ -50,20 +68,33 @@ public class SupplierManager {
     @DELETE
     public int remove(int id) {
 
-        return 0;
+        int retour = sb.remove(id);
+        
+        return retour;
     }
 
     /**
      * Méthode permettant de mettre a jour un fournisseur
      *
-     * @param Json : les informations du fournisseur à mettre a jour
+     * @param supplier : les informations du fournisseur à mettre a jour
      * @return un code de retour indiquant si la mise à jour s'est bien passé
      */
     @Path("update")
     @PUT
-    public int update(String Json) {
+    public int update(String supplier) {
 
-        return 0;
+        int retour = 1;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Supplier s = mapper.readValue(supplier, Supplier.class);
+            
+            retour = sb.update(s);
+
+           
+        } catch (IOException ex) {
+            Logger.getLogger(SupplierManager.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return retour;
     }
 
     /**
@@ -75,6 +106,6 @@ public class SupplierManager {
     @Produces({MediaType.APPLICATION_JSON})
     public List<Supplier> getList() {
 
-        return null;
+        return sb.getAll();
     }
 }

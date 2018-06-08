@@ -48,10 +48,10 @@ public class ResupplyOrder implements Serializable {
     @OneToOne
     private Address address;
     
+    private int orderState = ResupplyOrder.CREATED;
     @OneToMany(mappedBy = "order")
     private List<SupplierOrderLine> supplierOrderLines;
     
-    private int orderState = ResupplyOrder.CREATED;
 
     public ResupplyOrder() {
     }
@@ -121,6 +121,5 @@ public class ResupplyOrder implements Serializable {
     }
     
     
-    
-    
+  
 }

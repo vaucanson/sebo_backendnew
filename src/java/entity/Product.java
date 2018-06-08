@@ -50,12 +50,6 @@ public class Product implements Serializable {
     private String reference;
     
     private int minLimit;
-    
-    @OneToMany(mappedBy = "product")
-    private List<OrderLine> orderLines;
-    
-    @OneToMany(mappedBy = "product")
-    private List<SupplierOrderLine> supplierOrderLines;
 
     public Product() {
     }
@@ -136,22 +130,6 @@ public class Product implements Serializable {
         this.minLimit = minLimit;
     }
 
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
-
-    public void setOrderLines(List<OrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }
-
-    public List<SupplierOrderLine> getSupplierOrderLines() {
-        return supplierOrderLines;
-    }
-
-    public void setSupplierOrderLines(List<SupplierOrderLine> supplierOrderLines) {
-        this.supplierOrderLines = supplierOrderLines;
-    }
-
     public String getReference() {
         return reference;
     }
@@ -159,5 +137,12 @@ public class Product implements Serializable {
     public void setReference(String reference) {
         this.reference = reference;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", type=" + type + ", category=" + category + ", price=" + price + ", supplier=" + supplier + ", stock=" + stock + ", reference=" + reference + ", minLimit=" + minLimit + ", orderLines=" +  '}';
+    }
+    
+    
            
 }
