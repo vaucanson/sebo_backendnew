@@ -99,7 +99,7 @@ public class ResupplyManager {
     @Path("find/{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public ResupplyOrder findById(@PathParam("custommerId") int resupplyOrderId) {
+    public ResupplyOrder findById(@PathParam("id") int resupplyOrderId) {
 
         ResupplyOrder ro = stock.findResupply(resupplyOrderId);
 
