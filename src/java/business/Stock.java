@@ -41,12 +41,16 @@ public class Stock
      */
     public List<ResupplyOrder> findResuppliesBySupplier(int idSupplier)
     {
+        // on cherche le supplier, pour donner ensuite en paramètre
+        Supplier myParamSuppl = em.find(Supplier.class, idSupplier);
+        
         List<ResupplyOrder> retour = new ArrayList<>();
-        String sqlStr = "select ro from ResupplyOrder where supplier = :suppl";
+        String sqlStr = "select ro from ResupplyOrder ro where ro.supplier = :suppl";
         try 
         {
             Query query = em.createQuery(sqlStr);
-            query.setParameter ("suppl", idSupplier);
+            // le paramètre est notre Supplier, et pas juste son id
+            query.setParameter ("suppl", myParamSuppl);
             retour = query.getResultList();
         }
         catch (Exception e) 
@@ -56,6 +60,10 @@ public class Stock
         return retour;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public List<SupplierOrderLine> getSupplierLines()
     {
        List<SupplierOrderLine> list = new ArrayList<>();

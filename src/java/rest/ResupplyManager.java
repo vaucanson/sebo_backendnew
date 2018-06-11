@@ -112,7 +112,7 @@ public class ResupplyManager {
      * @param supplier est l'id du fournisseur
      * @return une commande fournisseur
      */
-    @Path("find/{supplier}")
+    @Path("findbysupplier/{supplier}")
     @GET
     public List<ResupplyOrder> findBySupplier(@PathParam("supplier") int supplier) {
 
