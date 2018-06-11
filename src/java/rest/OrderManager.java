@@ -6,15 +6,11 @@
 package rest;
 
 import business.ClientOrderManager;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import entity.Category;
 import entity.ClientOrder;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -39,11 +35,10 @@ public class OrderManager {
      * @param custommerId : id du client
      * @return un Json comprenant la liste de commande
      */
-    @Path("getOrdersByCustommer/{custommerId}")
+    @Path("getordersbycustommer/{custommerId}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<ClientOrder> getOrdersByCustommer(@PathParam("custommerId") int custommerId) {
-
         return com.getByCustomer(custommerId);
     }
 
@@ -53,11 +48,10 @@ public class OrderManager {
      * @param id : id de la commande
      * @return un Json comprenant les informations de la commande
      */
-    @Path("getOrderById/{id}")
+    @Path("getorderbyid/{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public ClientOrder getOrderById(@PathParam("id") int id) {
-
         return com.getById(id);
     }
 
@@ -67,11 +61,10 @@ public class OrderManager {
      * @param orderState : état de la commande désiré
      * @return un Json qui contient la liste des commandes
      */
-    @Path("getOrdersByState/{state}")
+    @Path("getordersbystate/{state}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<ClientOrder> getOrdersByState(@PathParam("state") int orderState) {
-
         return com.getByState(orderState);
     }
 
@@ -83,20 +76,9 @@ public class OrderManager {
      */
     @Path("send")
     @PUT
-    public int send(String order) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ClientOrder co = mapper.readValue(order, ClientOrder.class);
-
-            com.setState(4, co.getId());
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    @Consumes("application/json")
+    public int send(ClientOrder order) {
+        return com.setState(4, order.getId());
     }
 
     /**
@@ -107,20 +89,9 @@ public class OrderManager {
      */
     @Path("partialsend")
     @PUT
-    public int partialSend(String order) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ClientOrder co = mapper.readValue(order, ClientOrder.class);
-
-            com.setState(5, co.getId());
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    @Consumes("application/json")
+    public int partialSend(ClientOrder order) {
+        return com.setState(5, order.getId());
     }
 
     /**
@@ -131,20 +102,9 @@ public class OrderManager {
      */
     @Path("cancel")
     @PUT
-    public int cancel(String order) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ClientOrder co = mapper.readValue(order, ClientOrder.class);
-
-            com.setState(-1, co.getId());
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    @Consumes("application/json")
+    public int cancel(ClientOrder order) {
+        return com.setState(-1, order.getId());
     }
 
     /**
@@ -155,20 +115,9 @@ public class OrderManager {
      */
     @Path("standBy")
     @PUT
-    public int standBy(String order) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ClientOrder co = mapper.readValue(order, ClientOrder.class);
-
-            com.setState(6, co.getId());
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    @Consumes("application/json")
+    public int standBy(ClientOrder order) {
+        return com.setState(6, order.getId());
     }
 
     /**
@@ -179,20 +128,9 @@ public class OrderManager {
      */
     @Path("close")
     @PUT
-    public int close(String order) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ClientOrder co = mapper.readValue(order, ClientOrder.class);
-
-            com.setState(7, co.getId());
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    @Consumes("application/json")
+    public int close(ClientOrder order) {
+        return com.setState(7, order.getId());
     }
 
     /**
@@ -204,19 +142,9 @@ public class OrderManager {
      */
     @Path("prepare")
     @PUT
-    public int prepare(String order) {
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ClientOrder co = mapper.readValue(order, ClientOrder.class);
-
-            com.setState(3, co.getId());
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    @Consumes("application/json")
+    public int prepare(ClientOrder order) {
+        return com.setState(3, order.getId());
     }
 
 }

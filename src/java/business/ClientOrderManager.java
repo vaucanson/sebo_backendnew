@@ -55,9 +55,14 @@ public class ClientOrderManager
      * @param state
      * @param orderId 
      */
-    public void setState (int state, int orderId) {
+    public int setState (int state, int orderId) {
+        
+        
         ClientOrder co = getById(orderId);
         co.setEtat(state);
+        int retour = 0;
+        
+        return retour;
     }
     
     /**
@@ -94,6 +99,7 @@ public class ClientOrderManager
         
         try {
         Query query = em.createQuery(strSql);
+        query.setParameter("anId", customerId);
         retour = query.getResultList();   
         } catch (PersistenceException pe) {
             System.out.println("Problem retrieving ClientOrder list : " + pe.getMessage());
@@ -108,7 +114,7 @@ public class ClientOrderManager
      */
     public List<ClientOrder> getByState(int state) {
         List<ClientOrder> retour = new ArrayList<ClientOrder>();
-        String sqlStr = "select co from ClientOrder co where co.etat = :etat";
+        String sqlStr = "select co from ClientOrder co where co.orderState = :etat";
         try 
         {
             Query query = em.createQuery(sqlStr);
