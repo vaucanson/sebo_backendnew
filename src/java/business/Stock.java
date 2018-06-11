@@ -190,7 +190,7 @@ public class Stock
     public List<Product> getStock()
     {
         List<Product> retour = new ArrayList<Product>();
-        String sqlStr = "select pr from Product";
+        String sqlStr = "select pr from Product pr";
         try 
         {
             Query query = em.createQuery(sqlStr);
