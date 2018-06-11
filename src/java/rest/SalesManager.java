@@ -56,24 +56,6 @@ public class SalesManager {
         }
         return retour;
     }
-    
-    // L'ORIGINALE
-//    public int add(String sale) {
-//
-//        int retour = 1;
-//        try {
-//            ObjectMapper mapper = new ObjectMapper();
-//            Sale s = mapper.readValue("{\"end\":\"2018-01-01T00:00:00+01:00\",\"id\":4,\"rating\":9.0,\"start\":\"2018-03-03T00:00:00+01:00\",\"state\":true}", Sale.class);
-////            Sale s = mapper.readValue(sale, Sale.class);
-//            
-//            cat.addSale(s);
-//            retour = 0;
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(SalesManager.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return retour;
-//    }
 
     /**
      * Méthode permettant de supprimer une promotion
@@ -99,22 +81,18 @@ public class SalesManager {
      * @return un code de retour qui indique si tout s'est bien passé
      */
     @Path("update")
+    @Consumes("application/json")
     @POST
-    public int update(String sale) {
+    public int update(Sale mysale) {
         int retour = 1;
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            Sale s = mapper.readValue(sale, Sale.class);
-            
-            if (cat.updateSale(s) ==0)
-            retour = 0;
-           
-        } catch (IOException ex) {
+            retour = cat.updateSale(mysale);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
          
          return retour;
-    }
+    } 
 
     /**
      * Méthode renvoyant l'ensemble des genres d'articles qui ont actuellement
