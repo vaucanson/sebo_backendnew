@@ -212,7 +212,7 @@ public class Stock
     public List<Product> getStockUnderLimit()
     {
         List<Product> retour = new ArrayList<Product>();
-        String sqlStr = "select pr from Product where stock <= minlimit";
+        String sqlStr = "select pr from Product pr where pr.stock <= pr.minLimit";
         try 
         {
             Query query = em.createQuery(sqlStr);
