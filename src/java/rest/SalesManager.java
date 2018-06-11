@@ -66,9 +66,9 @@ public class SalesManager {
      * @param id : id de la promotion à supprimer
      * @return un code de retour qui indique si tout s'est bien passé
      */
-    @Path("remove")
+    @Path("remove/{id}")
     @DELETE
-    public int remove(int id) {
+    public int remove(@PathParam("id") int id) {
         int retour = 1;
         
         if (cat.removeSale(id) == 0) {
