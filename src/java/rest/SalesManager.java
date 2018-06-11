@@ -45,20 +45,35 @@ public class SalesManager {
     @Path("add")
     @Consumes("application/json")
     @POST
-    public int add(String sale) {
-
+    public int add(Sale mysale) {
         int retour = 1;
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            Sale s = mapper.readValue(sale, Sale.class);
-            cat.addSale(s);
+            cat.addSale(mysale);
             retour = 0;
 
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(SalesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retour;
     }
+    
+    // L'ORIGINALE
+//    public int add(String sale) {
+//
+//        int retour = 1;
+//        try {
+//            ObjectMapper mapper = new ObjectMapper();
+//            Sale s = mapper.readValue("{\"end\":\"2018-01-01T00:00:00+01:00\",\"id\":4,\"rating\":9.0,\"start\":\"2018-03-03T00:00:00+01:00\",\"state\":true}", Sale.class);
+////            Sale s = mapper.readValue(sale, Sale.class);
+//            
+//            cat.addSale(s);
+//            retour = 0;
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(SalesManager.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return retour;
+//    }
 
     /**
      * Méthode permettant de supprimer une promotion
