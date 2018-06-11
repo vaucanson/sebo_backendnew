@@ -20,6 +20,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -120,9 +121,9 @@ public class SalesManager {
      * @return un Json représentant la promotion
      */
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("getsale")
+    @Path("getsale/{id}")
     @GET
-    public Sale getSale(int id)
+    public Sale getSale(@PathParam("id") int id)
     {
         return cat.getSale(id);
     }
