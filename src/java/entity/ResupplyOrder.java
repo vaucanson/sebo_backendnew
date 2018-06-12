@@ -65,7 +65,7 @@ public class ResupplyOrder implements Serializable {
         this.id = id;
         this.orderDate = orderDate;
         this.receptionDate = receptionDate;
-        this.supplier = supplier;
+        //this.supplier = supplier;
         this.address = address;
     }
 
@@ -93,6 +93,7 @@ public class ResupplyOrder implements Serializable {
         this.receptionDate = receptionDate;
     }
 
+    
     public Supplier getSupplier() {
         return supplier;
     }

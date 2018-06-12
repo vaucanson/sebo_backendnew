@@ -40,24 +40,9 @@ public class CartManager {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("confirm")
-    public int confirm(String order) {
+    public int confirm(ClientOrder order) {
 
-        int retour = 0;
-
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            ClientOrder art = mapper.readValue(order, ClientOrder.class);
-            if (com.create(art) == 0) {
-                retour = 0;
-            } else {
-                retour = 1;
-            }
-
-        } catch (IOException ex) {
-            Logger.getLogger(CartManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return retour;
+            return com.create(order);
     }
 
     /**
@@ -73,17 +58,7 @@ public class CartManager {
     @Path("pay")
     public int pay(String paymentMethod) {
         
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            PaymentMethod art = mapper.readValue(paymentMethod, PaymentMethod.class);
-            // appel d'un service rest pour vérifier la validité du paiement auprès d'un api banque à réaliser
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(CartManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return 0;
+       return 0;
     }
 
 }

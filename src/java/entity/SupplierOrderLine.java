@@ -2,6 +2,7 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -24,7 +25,7 @@ public class SupplierOrderLine implements Serializable {
     
     private float subTotal;
     
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private ResupplyOrder order;
 
     public SupplierOrderLine() {
