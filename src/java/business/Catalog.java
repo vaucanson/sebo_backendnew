@@ -197,6 +197,7 @@ public class Catalog {
 
         try {
             productsList = (List) query.getResultList();
+            
         } catch (NoResultException nre) {
             System.out.println(nre.getMessage());
         }

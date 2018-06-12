@@ -26,8 +26,13 @@ public class Supplier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     @NotNull
+<<<<<<< HEAD
+     @Column(unique = true)
+=======
     @Column(unique = true)
+>>>>>>> master
     private String name;
     @OneToOne
     private Address address;
@@ -41,6 +46,7 @@ public class Supplier implements Serializable {
         this.address = address;
     }
 
+
     public int getId() {
         return id;
     }
@@ -53,7 +59,11 @@ public class Supplier implements Serializable {
         return name;
     }
 
+<<<<<<< HEAD
+   
+=======
     
+>>>>>>> master
     public void setName(String name) {
         this.name = name;
     }

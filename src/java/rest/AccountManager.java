@@ -5,18 +5,14 @@
  */
 package rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.ClientAccount;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -35,8 +31,8 @@ public class AccountManager {
      * @return un clientAccount
      */
     @GET
-    @Path("connect/{login}/{password}")
-    public ClientAccount connect(@PathParam("login") String login, @PathParam("password") String password)
+    @Path("/connect")
+    public ClientAccount connect(@QueryParam("login") String login, @QueryParam("password") String password)
     {
         entity.ClientAccount client = cliAcc.connect(login, password);
           
@@ -51,18 +47,8 @@ public class AccountManager {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("create")
-    public int create(String customerAccount)
+    public int create(ClientAccount customerAccount)
     {
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            entity.ClientAccount ca =  mapper.readValue(customerAccount, entity.ClientAccount .class);
-            retour = cliAcc.create(ca);
-
-           
-        } catch (IOException ex) {
-            Logger.getLogger(AccountManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return retour;
+          return cliAcc.create(customerAccount);
     } 
 }
