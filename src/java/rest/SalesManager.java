@@ -20,6 +20,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -44,16 +45,13 @@ public class SalesManager {
     @Path("add")
     @Consumes("application/json")
     @POST
-    public int add(String sale) {
-
+    public int add(Sale mysale) {
         int retour = 1;
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            Sale s = mapper.readValue(sale, Sale.class);
-            cat.addSale(s);
+            cat.addSale(mysale);
             retour = 0;
 
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(SalesManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return retour;
@@ -65,9 +63,9 @@ public class SalesManager {
      * @param id : id de la promotion à supprimer
      * @return un code de retour qui indique si tout s'est bien passé
      */
-    @Path("remove")
+    @Path("remove/{id}")
     @DELETE
-    public int remove(int id) {
+    public int remove(@PathParam("id") int id) {
         int retour = 1;
         
         if (cat.removeSale(id) == 0) {
@@ -83,22 +81,18 @@ public class SalesManager {
      * @return un code de retour qui indique si tout s'est bien passé
      */
     @Path("update")
+    @Consumes("application/json")
     @POST
-    public int update(String sale) {
+    public int update(Sale mysale) {
         int retour = 1;
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            Sale s = mapper.readValue(sale, Sale.class);
-            
-            if (cat.updateSale(s) ==0)
-            retour = 0;
-           
-        } catch (IOException ex) {
+            retour = cat.updateSale(mysale);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
          
          return retour;
-    }
+    } 
 
     /**
      * Méthode renvoyant l'ensemble des genres d'articles qui ont actuellement
@@ -120,9 +114,9 @@ public class SalesManager {
      * @return un Json représentant la promotion
      */
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("getsale")
+    @Path("getsale/{id}")
     @GET
-    public Sale getSale(int id)
+    public Sale getSale(@PathParam("id") int id)
     {
         return cat.getSale(id);
     }
