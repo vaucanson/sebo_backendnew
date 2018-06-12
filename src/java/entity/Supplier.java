@@ -26,7 +26,9 @@ public class Supplier implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     @NotNull
+     @Column(unique = true)
     private String name;
     @OneToOne
     private Address address;
@@ -40,6 +42,7 @@ public class Supplier implements Serializable {
         this.address = address;
     }
 
+
     public int getId() {
         return id;
     }
@@ -52,7 +55,7 @@ public class Supplier implements Serializable {
         return name;
     }
 
-    @Column(unique = true)
+   
     public void setName(String name) {
         this.name = name;
     }

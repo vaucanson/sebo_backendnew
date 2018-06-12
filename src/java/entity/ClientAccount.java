@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class ClientAccount implements Serializable {
     @Column(length = 40)
     private String firstName;
     @NotNull
-    @ManyToOne
+    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
     @NotNull
     @Column(length = 40, unique = true)
@@ -41,12 +42,12 @@ public class ClientAccount implements Serializable {
 
     public ClientAccount() {
     }
-
-    public ClientAccount(int id, String lastName, String firstName, Address adress, String email, String password) {
+    
+    public ClientAccount(int id, String lastName, String firstName, Address address, String email, String password) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.address = adress;
+        this.address = address;
         this.email = email;
         this.password = password;
     }
@@ -74,15 +75,7 @@ public class ClientAccount implements Serializable {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
-    public Address getAdress() {
-        return address;
-    }
-
-    public void setAdress(Address adress) {
-        this.address = adress;
-    }
-
+    
     public String getEmail() {
         return email;
     }
@@ -106,5 +99,4 @@ public class ClientAccount implements Serializable {
     public void setAddress(Address address) {
         this.address = address;
     }   
-
 }

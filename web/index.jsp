@@ -4,6 +4,10 @@
     Author     : MATTAR
 --%>
 
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.Date"%>
+<%@page import="org.omg.PortableInterceptor.SYSTEM_EXCEPTION"%>
 <%@page import="entity.Category"%>
 <%@page import="entity.Type"%>
 <%@page import="entity.Product"%>
@@ -18,7 +22,7 @@
     <body>
         <h1>testEntity</h1>
         <%
-
+             
          %>
     </body>
 </html>
