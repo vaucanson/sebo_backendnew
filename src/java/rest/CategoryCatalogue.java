@@ -18,7 +18,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,20 +44,10 @@ public class CategoryCatalogue {
     @Path("add")
     @Consumes({MediaType.APPLICATION_JSON})
     @POST
-    public int add(String category) {
+    public int add(Category category) {
 
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Category c = mapper.readValue(category, Category.class);
-            cat.addCategory(c);
-            retour = 0;
+        return cat.addCategory(category);
 
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return retour;
     }
 
     /**
@@ -67,41 +56,13 @@ public class CategoryCatalogue {
      * @param name: le nom de la catégorie que nous souhaitons supprimer
      * @return un code de retour indiquant si la suppression s'est bien passée
      */
-    @Path("remove")
+    @Path("remove/{name}")
     @DELETE
-    public int remove(String name) {
-
-        int retour = 1;
-
-        if (cat.removeCategory(name) == 0) {
-            retour = 0;
-        }
-
-        return retour;
-    }
-
-    /**
-     * Méthode permettant de mettre a jour une catégorie
-     *
-     * @param category : les informations de la catégorie à mettre a jour
-     * @return un code de retour indiquant si la mise à jour s'est bien passée
-     */
-    @Path("update")
-    @PUT
-    public int update(String category) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Category c = mapper.readValue(category, Category.class);
-            cat.updateCategory(c);
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return retour;
+     @Consumes({MediaType.APPLICATION_JSON}) //pas obligé ici (testé et approuvé et pipozé)
+    public int remove(@PathParam ("name") String name) {
+            
+        return cat.removeCategory(name);
+      
     }
 
     /**
@@ -109,7 +70,8 @@ public class CategoryCatalogue {
      *
      * @return un Json contenant notre liste
      */
-
+    @Path("getlist")
+    @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Category> getList() {
 
@@ -123,10 +85,10 @@ public class CategoryCatalogue {
      * @param name est le nom de la catégorie que nous souhaitons obtenir
      * @return un Json contenant notre catégorie
      */
-    @Path("getList/{category}")
+    @Path("getcategory/{name}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Category getCategory(@PathParam("category") String name) {
+    public Category getCategory(@PathParam ("name") String name) {
 
         return cat.getCategory(name);
     }

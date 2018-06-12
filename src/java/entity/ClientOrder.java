@@ -2,8 +2,14 @@
 package entity;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +46,7 @@ public class ClientOrder implements Serializable {
     private int orderState;
     
     @NotNull
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
     
     @NotNull
@@ -49,7 +55,7 @@ public class ClientOrder implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date orderDate;
-    
+
     @ManyToOne (cascade = CascadeType.ALL)
     private PaymentMethod paymet;
     
@@ -64,6 +70,20 @@ public class ClientOrder implements Serializable {
     public ClientOrder() {
         
     }
+    
+    
+    // constructeur qui sert pour la création d'une commande via le service REST
+    public ClientOrder(int id, Address address, ClientAccount client, PaymentMethod paymet)
+    {
+        this.id = id;
+        this.orderState = 1;
+        this.client = client;
+        this.address = address;
+        this.orderDate = new Date();
+        this.paymet = paymet;
+ 
+    }
+    
 
     public ClientOrder(int id, int etat, Address address, ClientAccount client, Date dateCommande, PaymentMethod paymet, Date dateLivraison) {
         this.id = id;

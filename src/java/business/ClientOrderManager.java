@@ -37,14 +37,14 @@ public class ClientOrderManager
      * @return un int à 0 si ça se passe bien, une autre valeur sinon.
      */
     public int create (ClientOrder co) {
-        int retour = 0;
+        int retour = 1;
         try
-        {
+        {            
             em.persist(co);
+            retour = 0;
         }
         catch (Exception e)
         {
-            retour = 1;
             e.printStackTrace();
         }
         
