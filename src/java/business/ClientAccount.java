@@ -5,6 +5,7 @@
  */
 package business;
 
+import java.awt.BorderLayout;
 import entity.Address;
 import javax.ejb.Stateless;
 import javax.jms.TransactionRolledBackException;
@@ -30,7 +31,6 @@ public class ClientAccount {
  */
 public boolean findClient(String email){
     boolean ret = false;
-    
     String strSql = "SELECT c from ClientAccount c where c.email= :anEmail";
     entity.ClientAccount cli;
     Query query = em.createQuery(strSql);

@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,19 +23,23 @@ public class OrderLine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     private int quantity;
+    
     @NotNull
     @ManyToOne
     private Product product;
+    
     @NotNull
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private ClientOrder clientOrder;
+    
     private float subtotal;
 
     public OrderLine() {
     }
 
-    public OrderLine(int id, int quantity, Product product, ClientOrder clientOrder, float subtotal) {
+    public OrderLine(int id, int quantity, Product product, ClientOrder clientOrder) {
         this.id = id;
         
         if (quantity > 0)

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import javax.persistence.CascadeType;
@@ -15,7 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -42,20 +45,25 @@ public class ClientOrder implements Serializable {
     
     private int orderState;
     
+    @NotNull
     @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Address address;
     
+    @NotNull
     @ManyToOne
     private ClientAccount client;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date orderDate;
-    
-    @ManyToOne (cascade = {CascadeType.ALL})
+
+    @ManyToOne (cascade = CascadeType.ALL)
     private PaymentMethod paymet;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date deliveryDate;
+    
+    @OneToMany(mappedBy = "clientOrder")
+    private List<OrderLine> orderLines;
     
     
 
@@ -142,6 +150,16 @@ public class ClientOrder implements Serializable {
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
+
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(List<OrderLine> orderLines) {
+        this.orderLines = orderLines;
+    }
+    
+    
     
     
 }

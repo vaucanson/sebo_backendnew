@@ -42,6 +42,8 @@ public class Product implements Serializable {
     @NotNull
     @ManyToOne
     private Supplier supplier;
+
+
     
     private int stock;
     
@@ -60,7 +62,6 @@ public class Product implements Serializable {
         this.type = type;
         this.category = category;
         this.price = price;
-        this.supplier = supplier;
         this.stock = Stock;
         this.minLimit = limit;
         this.reference = reference;
@@ -106,13 +107,6 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
 
     public int getStock() {
         return stock;
@@ -137,10 +131,18 @@ public class Product implements Serializable {
     public void setReference(String reference) {
         this.reference = reference;
     }
+    
+    public Supplier getSupplier() {
+        return supplier;
+    }
 
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
+    }
+    
     @Override
     public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", type=" + type + ", category=" + category + ", price=" + price + ", supplier=" + supplier + ", stock=" + stock + ", reference=" + reference + ", minLimit=" + minLimit + ", orderLines=" +  '}';
+        return "Product{" + "id=" + id + ", name=" + name + ", type=" + type + ", category=" + category + ", price=" + price + ", stock=" + stock + ", reference=" + reference + ", minLimit=" + minLimit + ", orderLines=" +  '}';
     }
     
     
