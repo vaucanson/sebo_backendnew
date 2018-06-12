@@ -73,7 +73,7 @@ public class ClientOrderManager
     public void pay (PaymentMethod cb, int orderId) {
         ClientOrder co = getById(orderId);
         co.setPaymet(cb);
-        co.setEtat(ClientOrder.PAYED);  // TODO : mettre l'état "payé"
+        co.setEtat(ClientOrder.VALIDATED_BY_BANK);  // TODO : mettre l'état "payé"
     }
     
     
