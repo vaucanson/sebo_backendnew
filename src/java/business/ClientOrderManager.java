@@ -113,13 +113,8 @@ public class ClientOrderManager
      * @return 
      */
     public List<ClientOrder> getByState(int state) {
-<<<<<<< HEAD
-        List<ClientOrder> retour=null;
-        String sqlStr = "select co from ClientOrder co where co.etat = :etat";
-=======
         List<ClientOrder> retour = new ArrayList<ClientOrder>();
         String sqlStr = "select co from ClientOrder co where co.orderState = :etat";
->>>>>>> master
         try 
         {
             Query query = em.createQuery(sqlStr);
