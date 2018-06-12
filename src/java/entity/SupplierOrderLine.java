@@ -16,10 +16,13 @@ import javax.validation.constraints.NotNull;
 public class SupplierOrderLine implements Serializable {
     @Id
     private int id;
+    
     @NotNull
     private int quantity;
+    
     @ManyToOne
     private Product product;
+    
     private float subTotal;
     
     @ManyToOne (cascade = CascadeType.ALL)

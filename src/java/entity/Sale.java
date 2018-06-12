@@ -23,11 +23,15 @@ public class Sale implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date startDate;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date endDate;
+    
     private float rating;
+    
     private boolean saleState;
 
     public Sale() {
