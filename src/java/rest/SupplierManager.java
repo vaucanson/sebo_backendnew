@@ -20,6 +20,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -32,6 +33,7 @@ import javax.ws.rs.core.MediaType;
 public class SupplierManager {
 
     @EJB SupplierBusiness sb;
+    
     /**
      * Méthode permettant d'ajouter un nouveau fournisseur à notre catalogue
      *
@@ -42,20 +44,8 @@ public class SupplierManager {
     @Path("add")
     @Consumes("application/json")
     @POST
-    public int add(String supplier) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Supplier s = mapper.readValue(supplier, Supplier.class);
-            
-            retour = sb.add(s);
-
-           
-        } catch (IOException ex) {
-            Logger.getLogger(SupplierManager.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        return retour;
+    public int add(Supplier supplier) {
+            return sb.add(supplier);
     }
 
     /**
@@ -64,13 +54,10 @@ public class SupplierManager {
      * @param id : l'id du fournisseur que nous souhaitons supprimer
      * @return un code de retour indiquant si la suppression s'est bien passé
      */
-    @Path("remove")
+    @Path("remove/{id}")
     @DELETE
-    public int remove(int id) {
-
-        int retour = sb.remove(id);
-        
-        return retour;
+    public int remove(@PathParam("id") int id) {
+        return sb.remove(id);
     }
 
     /**
@@ -81,27 +68,15 @@ public class SupplierManager {
      */
     @Path("update")
     @PUT
-    public int update(String supplier) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Supplier s = mapper.readValue(supplier, Supplier.class);
-            
-            retour = sb.update(s);
-
-           
-        } catch (IOException ex) {
-            Logger.getLogger(SupplierManager.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        return retour;
+    public int update(Supplier supplier) {
+            return sb.update(supplier);
     }
 
     /**
      * Méthode renvoyant l'ensemble des fournisseur que nous possédons
      * @return un Json comprenant la liste des fournisseurs
      */
-    @Path("getList")
+    @Path("getlist")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Supplier> getList() {

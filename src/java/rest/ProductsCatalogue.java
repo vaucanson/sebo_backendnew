@@ -32,7 +32,7 @@ public class ProductsCatalogue {
      * @param id : id de l'article demandé
      * @return un Json
      */
-    @Path("getOneProduct/{id}")
+    @Path("getoneproduct/{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON}) 
     public Product getOneProduct(@PathParam("id") int id) {
@@ -45,13 +45,15 @@ public class ProductsCatalogue {
      *
      * @return un Json
      */
-    @Path("getList")
+    @Path("getlist")
     @GET
     @Produces({MediaType.APPLICATION_JSON}) 
-    public List<Product> getList() {
+    public List<Product>getList() {
 
-        return cat.getProducts();
+       return cat.getProducts();
     }
+    
+    
 
 
     /**
@@ -60,7 +62,7 @@ public class ProductsCatalogue {
      * @param category est le nom de la catégorie des articles que nous souhaitons
      * @return un Json
      */
-    @Path("getListByCategory/{category}")
+    @Path("getlistbycategory/{category}")
     @GET
     @Produces({MediaType.APPLICATION_JSON}) 
     public List<Product> getListByCategory(@PathParam("category") String category) {
@@ -74,7 +76,7 @@ public class ProductsCatalogue {
      * @param type est le nom du genre des articles que nous souhaitons
      * @return un Json
      */
-    @Path("getListByType/{type}")
+    @Path("getlistbytype/{type}")
     @GET
     @Produces({MediaType.APPLICATION_JSON}) 
     public List<Product> getListByType(@PathParam("type") String type) {

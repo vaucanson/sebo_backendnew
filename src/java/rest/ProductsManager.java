@@ -6,9 +6,7 @@
 package rest;
 
 import business.Catalog;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.Product;
-import java.io.IOException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -16,6 +14,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 /**
  *
@@ -37,19 +36,9 @@ public class ProductsManager {
      */
     @Path("update")
     @PUT
-    public int update(String product) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Product p = mapper.readValue(product, Product.class);
-            cat.updateProduct(p);
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    @Consumes("application/json")
+    public int update(Product product) {
+        return cat.updateProduct(product);
     }
 
     /**
@@ -62,19 +51,8 @@ public class ProductsManager {
     @Path("add")
     @Consumes("application/json")
     @POST
-    public int add(String product) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Product p = mapper.readValue(product, Product.class);
-            cat.addProduct(p);
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    public int add(Product product) {
+        return cat.addProduct(product);  
     }
 
     /**
@@ -83,15 +61,9 @@ public class ProductsManager {
      * @param productId est l'Id du produit que nous devons supprimer
      * @return un code de retour indiquant que l'opération s'est bien passée
      */
-    @Path("remove")
+    @Path("remove/{productId}")
     @DELETE
-    public int remove(int productId) {
-
-        int retour = 1;
-
-           if (cat.removeProduct(productId) == 0)
-            retour = 0;
-           
-        return retour;
+    public int remove(@PathParam("productId") int productId) {
+           return cat.removeProduct(productId);
     }
 }
