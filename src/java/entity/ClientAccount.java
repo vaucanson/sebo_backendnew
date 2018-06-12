@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class ClientAccount implements Serializable {
     @Column(length = 40)
     private String firstName;
     @NotNull
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     private Address address;
     @NotNull
     @Column(length = 40, unique = true)

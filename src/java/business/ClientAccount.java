@@ -5,6 +5,7 @@
  */
 package business;
 
+import java.awt.BorderLayout;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,7 +28,6 @@ public class ClientAccount {
  */
 public boolean findClient(String email){
     boolean ret = false;
-    
     String strSql = "SELECT c from ClientAccount c where c.email= :anEmail";
     entity.ClientAccount cli;
     Query query = em.createQuery(strSql);
@@ -71,7 +71,7 @@ public entity.ClientAccount connect (String login, String pwd){
  */
 public int create (entity.ClientAccount cli){
     int codeRet = 1;
-    if(this.findClient(cli.getEmail())){
+    if(!this.findClient(cli.getEmail())){
         try {
           em.persist(cli);
           codeRet = 0;

@@ -29,8 +29,6 @@ public class PaymentMethod implements Serializable {
     @NotNull
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date expirationDate; 
-    @ManyToOne
-    private ClientAccount client;
 
     public PaymentMethod() {
     }

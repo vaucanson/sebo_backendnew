@@ -5,8 +5,21 @@
  */
 package rest;
 
+import business.AddressManager;
 import business.Catalog;
+import business.ClientOrderManager;
+import business.PaymentManager;
+import business.SupplierBusiness;
+import entity.Address;
+import entity.Category;
+import entity.ClientAccount;
+import entity.ClientOrder;
+import entity.OrderLine;
+import entity.PaymentMethod;
 import entity.Product;
+import entity.Supplier;
+import entity.Type;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -25,6 +38,11 @@ import javax.ws.rs.core.MediaType;
 public class ProductsCatalogue {
 
     @EJB Catalog cat;
+    @EJB SupplierBusiness sb;
+    @EJB business.ClientAccount ca;
+    @EJB AddressManager am;
+    @EJB PaymentManager pm;
+    @EJB ClientOrderManager com;
     
     /**
      * Méthode renvoyant un article a partir de son id
