@@ -30,6 +30,22 @@ public class Stock
      */
     public ResupplyOrder findResupply(int id) {
         ResupplyOrder ro = em.find(ResupplyOrder.class, id);
+        
+        List<SupplierOrderLine> myLinesList = new ArrayList<>();
+        String sqlStr = "select sol from SupplierOrderLine sol where sol.order = :thisorder";
+        try 
+        {
+            Query query = em.createQuery(sqlStr);
+            query.setParameter ("thisorder", ro);
+            myLinesList = query.getResultList();
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        
+        ro.setSupplierOrderLines(myLinesList);
+        
         return ro;
     }
 

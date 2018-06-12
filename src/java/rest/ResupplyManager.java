@@ -50,22 +50,19 @@ public class ResupplyManager {
     @Path("order")
     @Consumes("application/json")
     @POST
-    public int order(String SupplierLineList) {
-
+    public int order(List<SupplierOrderLine> mySolList) {
+        int retour = 1;
         try {
-            List<SupplierOrderLine> list = new ArrayList<>();
-          
-            ObjectMapper mapper = new ObjectMapper();
-            list  = mapper.readValue(SupplierLineList, List.class);
+            stock.order(mySolList);
+            // 
             
-            stock.order(list);
-            
-            return 0;
-        } catch (IOException ex) {
+            retour = 0;
+        } catch (Exception ex) {
             Logger.getLogger(ResupplyManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return 0;
+        return retour;
     }
+    
 
     @Path("createResupplyOrderLine")
     @Consumes("application/json")
@@ -96,13 +93,11 @@ public class ResupplyManager {
      * @param resupplyOrderId : id de la resupplyorder
      * @return une commande fournisseur
      */
-    @Path("find/{id}")
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    @Path("find/{id}")
+    @Produces("application/json")
     public ResupplyOrder findById(@PathParam("id") int resupplyOrderId) {
-
         ResupplyOrder ro = stock.findResupply(resupplyOrderId);
-
         return ro;
     }
 
@@ -112,8 +107,9 @@ public class ResupplyManager {
      * @param supplier est l'id du fournisseur
      * @return une commande fournisseur
      */
-    @Path("findbysupplier/{supplier}")
     @GET
+    @Path("findbysupplier/{supplier}")
+    @Produces(MediaType.APPLICATION_JSON)
     public List<ResupplyOrder> findBySupplier(@PathParam("supplier") int supplier) {
 
         List<ResupplyOrder> ro = stock.findResuppliesBySupplier(supplier);
@@ -121,8 +117,6 @@ public class ResupplyManager {
         return ro;
     }
     
-   
-
     
     /**
      * Méthode permettant de rentrer en stock les articles d'une commande auprès
@@ -132,9 +126,9 @@ public class ResupplyManager {
      * fournisseur
      * @return un code de retour indiquant si l'opération s'est bien passée
      */
+    @POST
     @Path("receive")
     @Consumes("application/json")
-    @POST
     public int receive(String supplyOrder) {
 
         // On reconstruit l'entity ressuply order avant de la parcourir et de créer chacun des produits qu'elle contient
@@ -142,9 +136,9 @@ public class ResupplyManager {
             ObjectMapper mapper = new ObjectMapper();
             ResupplyOrder resOrd = mapper.readValue(supplyOrder, ResupplyOrder.class);
             
-            for (SupplierOrderLine line : resOrd.getSupplierOrderLines()) {
-                // méthode catalogue a créer qui modifie une quantité 
-            }
+//            for (SupplierOrderLine line : resOrd.getSupplierOrderLines()) {
+//                // méthode catalogue a créer qui modifie une quantité 
+//            }
             
             resOrd.setReceptionDate(new Date());
             
