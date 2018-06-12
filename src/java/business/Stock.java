@@ -30,6 +30,22 @@ public class Stock
      */
     public ResupplyOrder findResupply(int id) {
         ResupplyOrder ro = em.find(ResupplyOrder.class, id);
+        
+        List<SupplierOrderLine> myLinesList = new ArrayList<>();
+        String sqlStr = "select sol from SupplierOrderLine sol where sol.order = :thisorder";
+        try 
+        {
+            Query query = em.createQuery(sqlStr);
+            query.setParameter ("thisorder", ro);
+            myLinesList = query.getResultList();
+        }
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        }
+        
+        ro.setSupplierOrderLines(myLinesList);
+        
         return ro;
     }
 
@@ -41,12 +57,16 @@ public class Stock
      */
     public List<ResupplyOrder> findResuppliesBySupplier(int idSupplier)
     {
+        // on cherche le supplier, pour donner ensuite en paramètre
+        Supplier myParamSuppl = em.find(Supplier.class, idSupplier);
+        
         List<ResupplyOrder> retour = new ArrayList<>();
-        String sqlStr = "select ro from ResupplyOrder where supplier = :suppl";
+        String sqlStr = "select ro from ResupplyOrder ro where ro.supplier = :suppl";
         try 
         {
             Query query = em.createQuery(sqlStr);
-            query.setParameter ("suppl", idSupplier);
+            // le paramètre est notre Supplier, et pas juste son id
+            query.setParameter ("suppl", myParamSuppl);
             retour = query.getResultList();
         }
         catch (Exception e) 
@@ -56,6 +76,10 @@ public class Stock
         return retour;
     }
     
+    /**
+     * 
+     * @return 
+     */
     public List<SupplierOrderLine> getSupplierLines()
     {
        List<SupplierOrderLine> list = new ArrayList<>();
@@ -182,7 +206,7 @@ public class Stock
     public List<Product> getStock()
     {
         List<Product> retour = new ArrayList<Product>();
-        String sqlStr = "select pr from Product";
+        String sqlStr = "select pr from Product pr";
         try 
         {
             Query query = em.createQuery(sqlStr);
@@ -204,7 +228,7 @@ public class Stock
     public List<Product> getStockUnderLimit()
     {
         List<Product> retour = new ArrayList<Product>();
-        String sqlStr = "select pr from Product where stock <= minlimit";
+        String sqlStr = "select pr from Product pr where pr.stock <= pr.minLimit";
         try 
         {
             Query query = em.createQuery(sqlStr);

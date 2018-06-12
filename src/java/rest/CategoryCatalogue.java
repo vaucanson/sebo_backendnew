@@ -83,10 +83,17 @@ public class CategoryCatalogue {
      * @param name est le nom de la catégorie que nous souhaitons obtenir
      * @return un Json contenant notre catégorie
      */
+<<<<<<< HEAD
     @Path("getCategory/{name}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Category getCategory(@PathParam ("name") String name) {
+=======
+    @Path("getList/{category}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Category getCategory(@PathParam("category") String name) {
+>>>>>>> master
 
         return cat.getCategory(name);
     }

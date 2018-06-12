@@ -81,7 +81,6 @@ public class Catalog {
 
         try {
             Product p = em.find(Product.class, idProduct);
-
             if (p != null && p.getId() == idProduct) {
                 em.remove(p);
                 codeRet = 0;

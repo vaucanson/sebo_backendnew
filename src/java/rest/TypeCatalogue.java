@@ -42,19 +42,8 @@ public class TypeCatalogue {
     @Path("add")
     @Consumes("application/json")
     @POST
-    public int add(String type) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Type t = mapper.readValue(type, Type.class);
-            cat.addType(t);
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    public int add(Type type) {
+            return cat.addType(type);
     }
 
     /**
@@ -66,14 +55,8 @@ public class TypeCatalogue {
     @Path("remove")
     @DELETE
     public int remove(String name) {
+        return cat.removeType(name);
 
-        int retour = 1;
-
-        if (cat.removeType(name) == 0) {
-            retour = 0;
-        }
-
-        return retour;
     }
 
     /**
@@ -83,20 +66,10 @@ public class TypeCatalogue {
      * @return un code de retour indiquant si l'update s'est bien passé
      */
     @Path("update")
+    @Consumes("application/json")
     @PUT
-    public int update(String type) {
-
-        int retour = 1;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            Type t = mapper.readValue(type, Type.class);
-            cat.updateType(t);
-            retour = 0;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return retour;
+    public int update(Type type) {
+           return cat.updateType(type);      
     }
 
     /**
@@ -108,7 +81,6 @@ public class TypeCatalogue {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Type> getListBySales() {
-
         return cat.getSaledTypes();
     }
 
@@ -121,7 +93,6 @@ public class TypeCatalogue {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Type> getList() {
-
         return cat.getTypes();
     }
 }
