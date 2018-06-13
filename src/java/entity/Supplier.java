@@ -52,11 +52,7 @@ public class Supplier implements Serializable {
     public String getName() {
         return name;
     }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> master
     public void setName(String name) {
         this.name = name;
     }

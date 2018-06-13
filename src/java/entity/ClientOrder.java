@@ -154,7 +154,6 @@ public class ClientOrder implements Serializable {
         this.deliveryDate = deliveryDate;
     }
 
-<<<<<<< HEAD
     public int getOrderState() {
         return orderState;
     }
@@ -163,7 +162,7 @@ public class ClientOrder implements Serializable {
         this.orderState = orderState;
     }
 
-=======
+	
     public List<OrderLine> getOrderLines() {
         return orderLines;
     }
