@@ -6,6 +6,8 @@
 package rest;
 
 import business.Catalog;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import javax.ejb.EJB;
 
 import entity.Category;
@@ -68,7 +70,7 @@ public class CategoryCatalogue {
      *
      * @return un Json contenant notre liste
      */
-    @Path("getList")
+    @Path("getlist")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Category> getList() {
@@ -83,11 +85,19 @@ public class CategoryCatalogue {
      * @param name est le nom de la catégorie que nous souhaitons obtenir
      * @return un Json contenant notre catégorie
      */
+<<<<<<< HEAD
 
     @Path("getCategory/{name}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Category getCategory(@PathParam ("name") String name) {
+=======
+    @Path("getcategory/{name}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Category getCategory(@PathParam ("name") String name) {
+
+>>>>>>> master
         return cat.getCategory(name);
     }
 }

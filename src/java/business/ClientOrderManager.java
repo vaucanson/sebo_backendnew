@@ -3,6 +3,7 @@ package business;
 
 import entity.ClientAccount;
 import entity.ClientOrder;
+import entity.OrderLine;
 import entity.PaymentMethod;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,6 @@ public class ClientOrderManager
     public List<ClientOrder> getByCustomer(int customerId) {
         List<ClientOrder> retour=null;
         String strSql = "select co from ClientOrder co where co.client.id =:anId";
-        
         try {
         Query query = em.createQuery(strSql);
         query.setParameter("anId", customerId);
@@ -127,4 +127,16 @@ public class ClientOrderManager
         }
         return retour;
     }
+    
+    public int createOrderLine(OrderLine oline){
+        int codeRet = 1;
+        try {
+          em.persist(oline);  
+          codeRet = 0;
+        } catch (PersistenceException pe) {
+            System.out.println("Problem creating Orderline : " + pe.getMessage());
+        }
+        
+        return codeRet;
+            }
 }

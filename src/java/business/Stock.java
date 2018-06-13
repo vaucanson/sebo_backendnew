@@ -179,7 +179,7 @@ public class Stock
         // Y'a mieux à faire que ci-dessous, par exemple en joinant directement dans la requête. 
         // À étudier.
         List<SupplierOrderLine> lines = new ArrayList<SupplierOrderLine>();
-        String sqlStr = "select sol from SupplierOrderLine s where s.order = null";
+       String sqlStr = "select sol from SupplierOrderLine s where s.order = null";
         try {
             Query query = em.createQuery(sqlStr);
             lines = query.getResultList();
