@@ -119,8 +119,7 @@ public class ResupplyManager {
     
     
     /**
-     * Méthode permettant de rentrer en stock les articles d'une commande auprès
-     * d'un fournisseur
+     * Méthode permettant de rentrer en stock les articles d'une commande fournisseur
      *
      * @param supplyOrder est un Json comprenant les informations de la commande
      * fournisseur
