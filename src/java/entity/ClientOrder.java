@@ -146,7 +146,6 @@ public class ClientOrder implements Serializable {
         this.deliveryDate = deliveryDate;
     }
 
-<<<<<<< HEAD
 //    public List<OrderLine> getOrderLines() {
 //        return orderLines;
 //    }
@@ -154,7 +153,7 @@ public class ClientOrder implements Serializable {
 //    public void setOrderLines(List<OrderLine> orderLines) {
 //        this.orderLines = orderLines;
 //    }
-=======
+
     public int getOrderState() {
         return orderState;
     }
@@ -163,19 +162,9 @@ public class ClientOrder implements Serializable {
         this.orderState = orderState;
     }
 
-	
-    public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
->>>>>>> master
-
     @Override
     public String toString() {
         return "ClientOrder{" + "id=" + id + ", orderState=" + orderState + ", address=" + address + ", client=" + client + ", orderDate=" + orderDate + ", paymet=" + paymet + ", deliveryDate=" + deliveryDate + '}';
     }
     
-    
-    
-    
->>>>>>> master
 }
