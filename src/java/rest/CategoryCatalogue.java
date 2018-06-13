@@ -84,6 +84,7 @@ public class CategoryCatalogue {
      * @param name est le nom de la catégorie que nous souhaitons obtenir
      * @return un Json contenant notre catégorie
      */
+
     @Path("getcategory/{name}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})

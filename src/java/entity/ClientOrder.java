@@ -21,13 +21,16 @@ public class ClientOrder implements Serializable {
     
     
     // Les états dans lesquels la commande peut être.
-    public static final int REJECTED = -1;
     public static final int PASSED = 1;
-    public static final int PAYED = 2;
-    public static final int IN_PREPARATION = 3;
-    public static final int SENT = 4;
-    public static final int PARTIALLY_SENT =5;
-    public static final int WAITING = 6;
+    public static final int VALIDATED_BY_BANK = 21;
+    public static final int REJECTED_BY_BANK = 22;
+    public static final int STOCK_COMPLETE = 31;
+    public static final int STOCK_INCOMPLETE = 32;
+    public static final int CANCELLED = 41;
+    public static final int PARTIAL = 42;
+    public static final int WAITING = 43;
+    public static final int IN_PREPARATION = 5;
+    public static final int SENT = 6;
     public static final int DELIVERED = 7;
     
     
@@ -143,6 +146,7 @@ public class ClientOrder implements Serializable {
         this.deliveryDate = deliveryDate;
     }
 
+<<<<<<< HEAD
 //    public List<OrderLine> getOrderLines() {
 //        return orderLines;
 //    }
@@ -150,6 +154,20 @@ public class ClientOrder implements Serializable {
 //    public void setOrderLines(List<OrderLine> orderLines) {
 //        this.orderLines = orderLines;
 //    }
+=======
+    public int getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(int orderState) {
+        this.orderState = orderState;
+    }
+
+	
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+>>>>>>> master
 
     @Override
     public String toString() {
@@ -159,4 +177,5 @@ public class ClientOrder implements Serializable {
     
     
     
+>>>>>>> master
 }
