@@ -29,6 +29,10 @@ public class Product implements Serializable {
     @NotNull
     private String name;
     
+    private String description;
+    
+    private String urlPicture;
+    
     @NotNull
     @ManyToOne
     private Type type;
@@ -56,7 +60,7 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(int id, String name, Type type, Category category, float price, Supplier supplier, int Stock, int limit, String reference) {
+    public Product(int id, String name, String description, String urlPicture ,Type type, Category category, float price, Supplier supplier, int Stock, int limit, String reference) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -138,6 +142,22 @@ public class Product implements Serializable {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
+    }
+    
+        public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUrlPicture() {
+        return urlPicture;
+    }
+
+    public void setUrlPicture(String urlPicture) {
+        this.urlPicture = urlPicture;
     }
     
     @Override
