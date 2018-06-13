@@ -6,8 +6,6 @@
 package rest;
 
 import business.Catalog;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
 import javax.ejb.EJB;
 
 import entity.Category;
@@ -74,6 +72,7 @@ public class CategoryCatalogue {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Category> getList() {
+        System.out.println("connexion");
 
         return cat.getCategoryList();
     }
