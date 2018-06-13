@@ -172,7 +172,5 @@ public class ClientOrder implements Serializable {
     }
     
     
-    
-    
->>>>>>> master
+
 }
