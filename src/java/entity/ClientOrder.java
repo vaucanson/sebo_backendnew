@@ -166,10 +166,5 @@ public class ClientOrder implements Serializable {
     public String toString() {
         return "ClientOrder{" + "id=" + id + ", orderState=" + orderState + ", address=" + address + ", client=" + client + ", orderDate=" + orderDate + ", paymet=" + paymet + ", deliveryDate=" + deliveryDate + '}';
     }
-    
-<<<<<<< HEAD
-    
 
-=======
->>>>>>> master
 }
