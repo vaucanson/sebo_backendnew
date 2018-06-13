@@ -145,6 +145,13 @@ public class ClientOrder implements Serializable {
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
-    
-    
+
+    public int getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(int orderState) {
+        this.orderState = orderState;
+    }
+
 }
