@@ -2,21 +2,13 @@
 package entity;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 
@@ -65,7 +57,7 @@ public class ClientOrder implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date deliveryDate;
     
-  
+
     public ClientOrder() {
         
     }
@@ -150,6 +142,14 @@ public class ClientOrder implements Serializable {
         this.deliveryDate = deliveryDate;
     }
 
+//    public List<OrderLine> getOrderLines() {
+//        return orderLines;
+//    }
+//
+//    public void setOrderLines(List<OrderLine> orderLines) {
+//        this.orderLines = orderLines;
+//    }
+
     public int getOrderState() {
         return orderState;
     }
@@ -158,13 +158,10 @@ public class ClientOrder implements Serializable {
         this.orderState = orderState;
     }
 
-	
- /*   public List<OrderLine> getOrderLines() {
-        return orderLines;
-    }
 
-    public void setOrderLines(List<OrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }*/
+    @Override
+    public String toString() {
+        return "ClientOrder{" + "id=" + id + ", orderState=" + orderState + ", address=" + address + ", client=" + client + ", orderDate=" + orderDate + ", paymet=" + paymet + ", deliveryDate=" + deliveryDate + '}';
+    }
 
 }
