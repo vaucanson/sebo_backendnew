@@ -7,6 +7,7 @@ package rest;
 
 import business.ClientOrderManager;
 import entity.ClientOrder;
+import entity.OrderLine;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -53,6 +54,19 @@ public class OrderManager {
     @Produces({MediaType.APPLICATION_JSON})
     public ClientOrder getOrderById(@PathParam("id") int id) {
         return com.getById(id);
+    }
+    
+    /**
+     * Méthode renvoyant la ligne de commande associée à une commande
+     * @param id : id de la commande
+     * @return  un Json comprenant les informations de la ligne de commande
+     */
+    @Path("getorderlinebyorderid/{id}")
+    @GET
+    @Produces ({MediaType.APPLICATION_JSON})
+    public List<dto.OrderLineDetails> getOrderLinesByOrderId(@PathParam("id") int id)
+    {
+        return com.getOrderLinesByOrderId(id);
     }
 
     /**
