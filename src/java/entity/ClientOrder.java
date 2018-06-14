@@ -65,11 +65,7 @@ public class ClientOrder implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date deliveryDate;
     
-    @OneToMany(mappedBy = "clientOrder")
-    private List<OrderLine> orderLines;
-    
-    
-
+  
     public ClientOrder() {
         
     }
@@ -163,16 +159,12 @@ public class ClientOrder implements Serializable {
     }
 
 	
-    public List<OrderLine> getOrderLines() {
+ /*   public List<OrderLine> getOrderLines() {
         return orderLines;
     }
 
     public void setOrderLines(List<OrderLine> orderLines) {
         this.orderLines = orderLines;
-    }
-    
-    
-    
-    
->>>>>>> master
+    }*/
+
 }
