@@ -93,9 +93,9 @@ public class ClientOrderManager
      * Liste des lignes de commandes pour une commande donnée
      * @param id : la commande concernée
      * @return renvoi une liste de lignes de commandes
-     *  private int id;
-    private String nom;
-   private String cat;
+     * private int id;
+     * private String nom;
+     * private String cat;
      */
     public List<dto.OrderLineDetails> getOrderLinesByOrderId(int id)
     {
