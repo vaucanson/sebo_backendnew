@@ -56,6 +56,10 @@ public class ClientOrder implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date deliveryDate;
+<<<<<<< HEAD
+=======
+    
+>>>>>>> master
 
     public ClientOrder() {
         
