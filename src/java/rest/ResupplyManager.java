@@ -8,6 +8,7 @@ package rest;
 import business.Catalog;
 import business.Stock;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entity.Product;
 import entity.ResupplyOrder;
 import entity.SupplierOrderLine;
 import java.io.IOException;
@@ -119,8 +120,7 @@ public class ResupplyManager {
     
     
     /**
-     * Méthode permettant de rentrer en stock les articles d'une commande auprès
-     * d'un fournisseur
+     * Méthode permettant de rentrer en stock les articles d'une commande fournisseur
      *
      * @param supplyOrder est un Json comprenant les informations de la commande
      * fournisseur
@@ -149,5 +149,24 @@ public class ResupplyManager {
         }  
         return 0;
     }
-
+    
+    
+    /**
+     * 
+     * @param refProduct
+     * @param quantity
+     * @return 
+     */
+    @POST
+    @Path("addtostock/{product}/{quantity}")
+    public int addToStock(@PathParam("product") String refProduct, @PathParam("quantity") int quantity) {
+        int retour = 0;
+        System.out.println("POST|||||||||||||| ref prod : " + refProduct + ", quantité : " + quantity);
+        
+        Product prod = cat.getProduct(refProduct);
+        prod.setStock(prod.getStock() + quantity);
+        cat.updateProduct(prod);
+        
+        return retour;
+    }
 }
