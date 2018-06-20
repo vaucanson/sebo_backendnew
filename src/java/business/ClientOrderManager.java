@@ -154,6 +154,7 @@ public class ClientOrderManager
         {
             e.printStackTrace();
         }
+        System.out.println(retour);
         return retour;
     }
     
