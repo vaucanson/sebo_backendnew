@@ -59,6 +59,9 @@ public class ClientOrder implements Serializable {
 <<<<<<< HEAD
 =======
     
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 
     public ClientOrder() {
