@@ -92,7 +92,7 @@ public class OrderManager {
     @PUT
     @Consumes("application/json")
     public int send(ClientOrder order) {
-        return com.setState(4, order.getId());
+        return com.setState(ClientOrder.SENT, order.getId());
     }
 
     /**
@@ -105,7 +105,7 @@ public class OrderManager {
     @PUT
     @Consumes("application/json")
     public int partialSend(ClientOrder order) {
-        return com.setState(5, order.getId());
+        return com.setState(ClientOrder.PARTIAL, order.getId());
     }
 
     /**
@@ -114,11 +114,11 @@ public class OrderManager {
      * @param order est un Json représentant une commande
      * @return un code de retour si l'opération s'est bien passée.
      */
-    @Path("cancel")
+    @Path("cancel/{id}")
     @PUT
     @Consumes("application/json")
-    public int cancel(ClientOrder order) {
-        return com.setState(-1, order.getId());
+    public int cancel(@PathParam("id") int order) {
+        return com.setState(ClientOrder.CANCELLED, order);
     }
 
     /**
@@ -131,7 +131,7 @@ public class OrderManager {
     @PUT
     @Consumes("application/json")
     public int standBy(ClientOrder order) {
-        return com.setState(6, order.getId());
+        return com.setState(ClientOrder.WAITING, order.getId());
     }
 
     /**
@@ -144,7 +144,7 @@ public class OrderManager {
     @PUT
     @Consumes("application/json")
     public int close(ClientOrder order) {
-        return com.setState(7, order.getId());
+        return com.setState(ClientOrder.DELIVERED, order.getId());
     }
 
     /**
@@ -154,11 +154,12 @@ public class OrderManager {
      * @param order est un Json représentant une commande
      * @return un code de retour si l'opération s'est bien passée.
      */
-    @Path("prepare")
+    @Path("prepare/{id}")
     @PUT
     @Consumes("application/json")
-    public int prepare(ClientOrder order) {
-        return com.setState(3, order.getId());
+    public int prepare(@PathParam("id") int order) {
+        return com.setState(ClientOrder.IN_PREPARATION, order);
     }
 
 }
+
