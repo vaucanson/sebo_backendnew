@@ -1,9 +1,7 @@
 
 package business;
 
-import dto.OrderLineDetails;
 import dto.OrderedProduct;
-import entity.ClientOrder;
 import entity.ResupplyOrder;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -30,7 +28,7 @@ public class OrderedProductManager
     }
     
     /**
-     * EN COURS !!!!!!!!!
+     * Renvoie la liste des OrderedProducts dont la commande est en état ORDERED
      * @return 
      */
     public List<OrderedProduct> getOrderedProductsList() {
@@ -55,35 +53,5 @@ public class OrderedProductManager
                 
         return list;
     }
-    
-    /**
-     * Liste des lignes de commandes pour une commande donnée
-     * @param id : la commande concernée
-     * @return renvoi une liste de lignes de commandes
-     * private int id;
-     * private String nom;
-     * private String cat;
-     */
-//    public List<dto.OrderLineDetails> getOrderLinesByOrderId(int id)
-//    {
-//        String strSql = "select new dto.OrderLineDetails("
-//                + "p.id, p.name, p.category.name, o.quantity, p.stock"
-//                + ") from OrderLine o join o.product p where o.clientOrder = :anId";
-//        List<OrderLineDetails> list = null;
-//        try{
-//            Query query = em.createQuery(strSql);
-//            ClientOrder ord = em.find (ClientOrder.class, id);
-//            query.setParameter("anId", ord);
-//            
-//            list = query.getResultList();
-//        }
-//        catch (PersistenceException pe)
-//        {
-//            System.out.println("Problem retrieving OrderLines list : " + pe.getMessage());
-//        }
-//        
-//        return list;
-//    }
-    
  
 }
